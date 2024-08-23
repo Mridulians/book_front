@@ -30,8 +30,9 @@ const BookList = ({ books, setBooks }) => {
     const newTitle = prompt("Enter new title:", book.title);
     const newAuthor = prompt("Enter new author:", book.author);
     const newGenre = prompt("Enter new genre:", book.genre);
+    const newCreator = prompt("Enter new genre:", book.createdBy);
 
-    if (newTitle && newAuthor && newGenre) {
+    if (newTitle && newAuthor && newGenre && newCreator) {
       try {
         const res = await axios.patch(
           `https://book-listing-backend-s0dh.onrender.com/books/${book._id}`,
@@ -39,6 +40,7 @@ const BookList = ({ books, setBooks }) => {
             title: newTitle,
             author: newAuthor,
             genre: newGenre,
+            createdBy: newCreator,
           }
         );
         setBooks(books.map((b) => (b._id === book._id ? res.data : b)));
